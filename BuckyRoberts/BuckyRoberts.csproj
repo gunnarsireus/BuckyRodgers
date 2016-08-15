@@ -197,6 +197,8 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="scripts\Index2.jsx" />
+    <Content Include="scripts\Index.jsx" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
@@ -205,6 +207,7 @@
     <Content Include="scripts\React-dom-15.3.0.js" />
     <Content Include="scripts\react-dom-15.3.0.min.js" />
     <Content Include="scripts\react-with-addons-15.3.0.min.js" />
+    <Content Include="scripts\showdown.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -219,7 +222,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
