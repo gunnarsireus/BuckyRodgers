@@ -9,6 +9,8 @@ var Comment = React.createClass({
         console.log("Removing comment");
     },
     save: function () {
+        var val = this.refs.newText.value
+        console.log("New comment " + val)
         this.setState({ editing: false })
     },
 
@@ -31,7 +33,7 @@ var Comment = React.createClass({
     renderForm: function () {  
         return (
             <div className="commentContainer">
-                <textArea defaultValue={this.props.children}></textArea>
+                <textArea ref="newText"  defaultValue={this.props.children}></textArea>
                <button onClick={this.save}   className="btn-success">Save</button>
             </div>
     );
