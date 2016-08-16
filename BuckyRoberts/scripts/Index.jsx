@@ -11,10 +11,10 @@ var Comment = React.createClass({
                <div className="commentText">
                  {this.props.children}
                </div>
-               <button onClick={this.edit}   className="button-primary">
+               <button onClick={this.edit}   className="btn-primary">
                 Edit
                </button>
-              <button onClick={this.remove}  className="button-danger">
+              <button onClick={this.remove}  className="btn-danger">
                   Remove
                </button>
             </div>
