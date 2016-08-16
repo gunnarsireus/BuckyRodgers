@@ -11,7 +11,8 @@ var Comment = React.createClass({
     save: function () {
         this.setState({ editing: false })
     },
-    render: function () {
+
+    renderNormal: function () {  
         return (
             <div className="commentContainer">
                <div className="commentText">
@@ -25,6 +26,24 @@ var Comment = React.createClass({
                </button>
             </div>
         );
+    },
+
+    renderForm: function () {  
+        return (
+            <div className="commentContainer">
+                <textArea defaultValue={this.props.children}>  </textArea>
+               <button onClick={this.save}   className="btn-success">Save</button>
+            </div>
+    );
+    },
+
+    render: function() {
+         if (this.state.editing) {
+             return this.renderForm();
+         }
+         else {
+             return this.renderNormal();
+         }
     }
 });
 
