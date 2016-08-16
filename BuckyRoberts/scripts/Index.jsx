@@ -69,14 +69,9 @@ var CheckBox = React.createClass({
 });
 
 var Board = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
-            comments:
-            [
-                "I like bacon",
-                "Want to get ic Cream",
-                "Ok, we have enought comments now"
-            ]
+            comments: []
         }
     },
 
@@ -84,6 +79,11 @@ var Board = React.createClass({
         return (<Comment key={i} index={i} updateCommentText={this.updateComment} deleteFromBoard = {this.removeComment}>
                     {text}
                </Comment>);
+    },
+    add:function(text) {
+        var arr = this.state.comments;
+        arr.push(text);
+        this.setState({ comments: arr });
     },
     updateComment:function(newText,i) {
         console.log("Updating comment " + i);
@@ -95,14 +95,17 @@ var Board = React.createClass({
     removeComment: function(i) {
         console.log("Removing comment " + i);
         var arr = this.state.comments;
-        arr.plice(i, 1);
+        arr.splice(i, 1);
         this.setState({ comments: arr });
     },
     render: function() {
         return (
+        <div>
+            <button className="btn-info" onClick={this.add.bind(null, "Default text")}>Add New</button>
             <div className="board">
                 { this.state.comments.map(this.eachComment) }
             </div>
+        </div>
         );
     }
 
