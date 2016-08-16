@@ -1,9 +1,15 @@
 var Comment = React.createClass({
+    getInitialState: function () {
+        return { editing: false }
+    },
     edit: function () {
-        alert("Edit alert");
+        this.setState({ editing: true })
     },
     remove: function () {
-        alert("Remove alert");
+        console.log("Removing comment");
+    },
+    save: function () {
+        this.setState({ editing: false })
     },
     render: function () {
         return (
@@ -21,13 +27,40 @@ var Comment = React.createClass({
         );
     }
 });
+
+
+var CheckBox = React.createClass({
+
+    getInitialState: function() {
+        return {checked: true}
+    },
+    handleChecked: function() {
+        this.setState({checked: !this.state.checked})  
+    },
+    render: function() {
+        var msg;
+        if (this.state.checked) {
+            msg = "checked";
+        } else {
+            msg = "unchecked";
+        }
+        return (
+        <div>
+            <input type="checkbox"  onChange={this.handleChecked} defaultChecked={this.state.checked}/>
+            <h3>Checkbox is {msg}</h3 >
+   
+        </div>);
+}
+});
+
 ReactDOM.render(<div className="board">
     <Comment>Hej now</Comment>
         <Comment>AAAAA</Comment>
         <Comment>BGBB</Comment>
 </div>
-,
+, document.getElementById("example"));
 
-document.getElementById("example"));
+//ReactDOM.render(<CheckBox/>, document.getElementById("example"));
+
 
 
