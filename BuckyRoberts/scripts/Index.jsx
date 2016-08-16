@@ -74,12 +74,32 @@ var CheckBox = React.createClass({
 }
 });
 
-ReactDOM.render(<div className="board">
-    <Comment>Hej now</Comment>
-        <Comment>AAAAA</Comment>
-        <Comment>BGBB</Comment>
-</div>
-, document.getElementById("example"));
+var Board = React.createClass({
+    getInitialState: function() {
+        return {
+            comments:
+            [
+                "I like bacon",
+                "Want to get ic Cream",
+                "Ok, we have enought comments now"
+            ]
+        }
+    },
+    render: function() {
+        return (
+            <div className="board">
+                { this.state.comments.map(function(text, i) {
+                     return (<Comment key={i}>{text}</Comment>);
+                })
+            }
+            </div>
+        );
+    }
+
+});
+
+
+ReactDOM.render(<Board /> , document.getElementById("example"));
 
 //ReactDOM.render(<CheckBox/>, document.getElementById("example"));
 
