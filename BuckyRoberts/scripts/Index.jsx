@@ -31,7 +31,7 @@ var Comment = React.createClass({
     renderForm: function () {  
         return (
             <div className="commentContainer">
-                <textArea defaultValue={this.props.children}>  </textArea>
+                <textArea defaultValue={this.props.children}></textArea>
                <button onClick={this.save}   className="btn-success">Save</button>
             </div>
     );
