@@ -7,25 +7,19 @@ var Comment = React.createClass({
     },
     remove: function () {
         console.log("Removing comment");
+        this.props.deleteFromBoard(this.props.index);
     },
     save: function () {
-        var val = this.refs.newText.value
-        console.log("New comment " + val)
-        this.setState({ editing: false })
+        this.props.updateCommentText(this.refs.newText.value,this.props.index);
+        this.setState({ editing: false });
     },
 
     renderNormal: function () {  
         return (
             <div className="commentContainer">
-               <div className="commentText">
-                 {this.props.children}
-               </div>
-               <button onClick={this.edit}   className="btn-primary">
-                Edit
-               </button>
-              <button onClick={this.remove}  className="btn-danger">
-                  Remove
-               </button>
+               <div className="commentText">{this.props.children}</div>
+               <button onClick={this.edit}   className="btn-primary">Edit</button>
+               <button onClick={this.remove}  className="btn-danger">Remove</button>
             </div>
         );
     },
@@ -87,7 +81,7 @@ var Board = React.createClass({
     },
 
     eachComment: function(text,i) {
-        return (<Comment key={i} index={i}>
+        return (<Comment key={i} index={i} updateCommentText={this.updateComment} deleteFromBoard = {this.removeComment}>
                     {text}
                </Comment>);
     },
