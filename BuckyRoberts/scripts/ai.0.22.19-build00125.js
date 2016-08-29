@@ -1065,7 +1065,7 @@ var Microsoft;
                             time: ApplicationInsights.FieldType.Required,
                             iKey: ApplicationInsights.FieldType.Required,
                             name: ApplicationInsights.FieldType.Required,
-                            sampleRate: function () {
+                            sampleRate() {
                                 return (_this.sampleRate == 100) ? ApplicationInsights.FieldType.Hidden : ApplicationInsights.FieldType.Required;
                             },
                             tags: ApplicationInsights.FieldType.Required,
@@ -3370,18 +3370,18 @@ var Microsoft;
                 ApplicationInsights._InternalLogging.verboseLogging = function () { return _this.config.verboseLogging; };
                 ApplicationInsights._InternalLogging.enableDebugExceptions = function () { return _this.config.enableDebug; };
                 var configGetters = {
-                    instrumentationKey: function () { return _this.config.instrumentationKey; },
-                    accountId: function () { return _this.config.accountId; },
-                    sessionRenewalMs: function () { return _this.config.sessionRenewalMs; },
-                    sessionExpirationMs: function () { return _this.config.sessionExpirationMs; },
-                    endpointUrl: function () { return _this.config.endpointUrl; },
-                    emitLineDelimitedJson: function () { return _this.config.emitLineDelimitedJson; },
-                    maxBatchSizeInBytes: function () { return _this.config.maxBatchSizeInBytes; },
-                    maxBatchInterval: function () { return _this.config.maxBatchInterval; },
-                    disableTelemetry: function () { return _this.config.disableTelemetry; },
-                    sampleRate: function () { return _this.config.samplingPercentage; },
-                    cookieDomain: function () { return _this.config.cookieDomain; },
-                    enableSessionStorageBuffer: function () { return _this.config.enableSessionStorageBuffer; }
+                    instrumentationKey() { return _this.config.instrumentationKey; },
+                    accountId() { return _this.config.accountId; },
+                    sessionRenewalMs() { return _this.config.sessionRenewalMs; },
+                    sessionExpirationMs() { return _this.config.sessionExpirationMs; },
+                    endpointUrl() { return _this.config.endpointUrl; },
+                    emitLineDelimitedJson() { return _this.config.emitLineDelimitedJson; },
+                    maxBatchSizeInBytes() { return _this.config.maxBatchSizeInBytes; },
+                    maxBatchInterval() { return _this.config.maxBatchInterval; },
+                    disableTelemetry() { return _this.config.disableTelemetry; },
+                    sampleRate() { return _this.config.samplingPercentage; },
+                    cookieDomain() { return _this.config.cookieDomain; },
+                    enableSessionStorageBuffer() { return _this.config.enableSessionStorageBuffer; }
                 };
                 var enableExperiment = new ApplicationInsights.SplitTest().isEnabled(this.config.instrumentationKey, 5);
                 this.config.enableSessionStorageBuffer = enableExperiment;

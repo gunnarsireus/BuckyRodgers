@@ -1,20 +1,20 @@
 var Comment = React.createClass({
-    getInitialState: function () {
+    getInitialState() {
         return { editing: false }
     },
-    edit: function () {
+    edit() {
         this.setState({ editing: true })
     },
-    remove: function () {
+    remove() {
         console.log("Removing comment");
         this.props.deleteFromBoard(this.props.index);
     },
-    save: function () {
+    save() {
         this.props.updateCommentText(this.refs.newText.value,this.props.index);
         this.setState({ editing: false });
     },
 
-    renderNormal: function () {  
+    renderNormal() {  
         return (
             <div className="commentContainer">
                <div className="commentText">{this.props.children}</div>
@@ -24,7 +24,7 @@ var Comment = React.createClass({
         );
     },
 
-    renderForm: function () {  
+    renderForm() {  
         return (
             <div className="commentContainer">
                 <textArea ref="newText"  defaultValue={this.props.children}></textArea>
@@ -33,7 +33,7 @@ var Comment = React.createClass({
     );
     },
 
-    render: function() {
+    render() {
          if (this.state.editing) {
              return this.renderForm();
          }
@@ -46,13 +46,13 @@ var Comment = React.createClass({
 
 var CheckBox = React.createClass({
 
-    getInitialState: function() {
+    getInitialState() {
         return {checked: true}
     },
-    handleChecked: function() {
+    handleChecked() {
         this.setState({checked: !this.state.checked})  
     },
-    render: function() {
+    render() {
         var msg;
         if (this.state.checked) {
             msg = "checked";
@@ -69,36 +69,36 @@ var CheckBox = React.createClass({
 });
 
 var Board = React.createClass({
-    getInitialState: function () {
+    getInitialState() {
         return {
             comments: []
         }
     },
 
-    eachComment: function(text,i) {
+    eachComment(text,i) {
         return (<Comment key={i} index={i} updateCommentText={this.updateComment} deleteFromBoard = {this.removeComment}>
                     {text}
                </Comment>);
     },
-    add:function(text) {
+    add(text) {
         var arr = this.state.comments;
         arr.push(text);
         this.setState({ comments: arr });
     },
-    updateComment:function(newText,i) {
+    updateComment(newText,i) {
         console.log("Updating comment " + i);
         var arr = this.state.comments;
         arr[i] = newText;
         this.setState({ comments: arr });
     },
 
-    removeComment: function(i) {
+    removeComment(i) {
         console.log("Removing comment " + i);
         var arr = this.state.comments;
         arr.splice(i, 1);
         this.setState({ comments: arr });
     },
-    render: function() {
+    render() {
         return (
         <div>
             <button className="btn-info" onClick={this.add.bind(null, "Default text")}>Add New</button>
