@@ -20,7 +20,7 @@ var ReactDOMComponentTree = _dereq_(42);
 var focusNode = _dereq_(158);
 
 var AutoFocusUtils = {
-  focusDOMComponent: function () {
+  focusDOMComponent() {
     focusNode(ReactDOMComponentTree.getNodeFromInstance(this));
   }
 };
@@ -829,7 +829,7 @@ _assign(CallbackQueue.prototype, {
    *
    * @internal
    */
-  notifyAll: function () {
+  notifyAll() {
     var callbacks = this._callbacks;
     var contexts = this._contexts;
     if (callbacks) {
@@ -844,7 +844,7 @@ _assign(CallbackQueue.prototype, {
     }
   },
 
-  checkpoint: function () {
+  checkpoint() {
     return this._callbacks ? this._callbacks.length : 0;
   },
 
@@ -860,7 +860,7 @@ _assign(CallbackQueue.prototype, {
    *
    * @internal
    */
-  reset: function () {
+  reset() {
     this._callbacks = null;
     this._contexts = null;
   },
@@ -868,7 +868,7 @@ _assign(CallbackQueue.prototype, {
   /**
    * `PooledClass` looks for this.
    */
-  destructor: function () {
+  destructor() {
     this.reset();
   }
 
@@ -1009,7 +1009,7 @@ if (ExecutionEnvironment.canUseDOM) {
  * set on the active element.
  */
 var newValueProp = {
-  get: function () {
+  get() {
     return activeElementValueProp.get.call(this);
   },
   set: function (val) {
@@ -1810,7 +1810,7 @@ var DOMPropertyOperations = {
     node.setAttribute(DOMProperty.ID_ATTRIBUTE_NAME, id);
   },
 
-  createMarkupForRoot: function () {
+  createMarkupForRoot() {
     return DOMProperty.ROOT_ATTRIBUTE_NAME + '=""';
   },
 
@@ -2545,11 +2545,11 @@ var EventPluginHub = {
   /**
    * These are needed for tests only. Do not use!
    */
-  __purge: function () {
+  __purge() {
     listenerBank = {};
   },
 
-  __getListenerBank: function () {
+  __getListenerBank() {
     return listenerBank;
   }
 
@@ -2768,7 +2768,7 @@ var EventPluginRegistry = {
    * Exposed for unit testing.
    * @private
    */
-  _resetEventPlugins: function () {
+  _resetEventPlugins() {
     EventPluginOrder = null;
     for (var pluginName in namesToPlugins) {
       if (namesToPlugins.hasOwnProperty(pluginName)) {
@@ -3210,7 +3210,7 @@ function FallbackCompositionState(root) {
 }
 
 _assign(FallbackCompositionState.prototype, {
-  destructor: function () {
+  destructor() {
     this._root = null;
     this._startText = null;
     this._fallbackText = null;
@@ -3221,7 +3221,7 @@ _assign(FallbackCompositionState.prototype, {
    *
    * @return {string}
    */
-  getText: function () {
+  getText() {
     if ('value' in this._root) {
       return this._root.value;
     }
@@ -3234,7 +3234,7 @@ _assign(FallbackCompositionState.prototype, {
    *
    * @return {string}
    */
-  getData: function () {
+  getData() {
     if (this._fallbackText) {
       return this._fallbackText;
     }
@@ -4097,7 +4097,7 @@ var ReactBrowserEventEmitter = _assign({}, ReactEventEmitterMixin, {
   /**
    * @return {boolean} True if callbacks are enabled.
    */
-  isEnabled: function () {
+  isEnabled() {
     return !!(ReactBrowserEventEmitter.ReactEventListener && ReactBrowserEventEmitter.ReactEventListener.isEnabled());
   },
 
@@ -4191,7 +4191,7 @@ var ReactBrowserEventEmitter = _assign({}, ReactEventEmitterMixin, {
    *
    * @see http://www.quirksmode.org/dom/events/scroll.html
    */
-  ensureScrollValueMonitoring: function () {
+  ensureScrollValueMonitoring() {
     if (hasEventPageXY === undefined) {
       hasEventPageXY = document.createEvent && 'pageX' in document.createEvent('MouseEvent');
     }
@@ -4681,7 +4681,7 @@ var injectedMixins = [];
  * specification is that you implement a `render` method.
  *
  *   var MyComponent = React.createClass({
- *     render: function() {
+ *     render() {
  *       return <div>Hello World</div>;
  *     }
  *   });
@@ -4755,7 +4755,7 @@ var ReactClassInterface = {
    * Invoked once before the component is mounted. The return value will be used
    * as the initial value of `this.state`.
    *
-   *   getInitialState: function() {
+   *   getInitialState() {
    *     return {
    *       isOn: false,
    *       fooBaz: new BazFoo()
@@ -4780,7 +4780,7 @@ var ReactClassInterface = {
    * No guarantees are made about when or how often this method is invoked, so
    * it must not have side effects.
    *
-   *   render: function() {
+   *   render() {
    *     var name = this.props.name;
    *     return <div>Hello, {name}!</div>;
    *   }
@@ -4969,7 +4969,7 @@ var RESERVED_SPEC_KEYS = {
   statics: function (Constructor, statics) {
     mixStaticSpecIntoComponent(Constructor, statics);
   },
-  autobind: function () {} };
+  autobind() {} };
 
 // noop
 function validateTypeDef(Constructor, typeDef, location) {
@@ -5235,7 +5235,7 @@ var ReactClassMixin = {
    * @protected
    * @final
    */
-  isMounted: function () {
+  isMounted() {
     return this.updater.isMounted(this);
   }
 };
@@ -5451,7 +5451,7 @@ if ("development" !== 'production') {
   var defineDeprecationWarning = function (methodName, info) {
     if (canDefineProperty) {
       Object.defineProperty(ReactComponent.prototype, methodName, {
-        get: function () {
+        get() {
           "development" !== 'production' ? warning(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]) : void 0;
           return undefined;
         }
@@ -5698,7 +5698,7 @@ var ReactComponentTreeDevtool = {
     unmountedIDs[id] = true;
     delete rootIDs[id];
   },
-  purgeUnmountedComponents: function () {
+  purgeUnmountedComponents() {
     if (ReactComponentTreeDevtool._preventPurging) {
       // Should only be used for testing.
       return;
@@ -5770,10 +5770,10 @@ var ReactComponentTreeDevtool = {
     var item = tree[id];
     return item ? item.updateCount : 0;
   },
-  getRootIDs: function () {
+  getRootIDs() {
     return Object.keys(rootIDs);
   },
-  getRegisteredIDs: function () {
+  getRegisteredIDs() {
     return Object.keys(tree);
   }
 };
@@ -6187,7 +6187,7 @@ var ReactCompositeComponentMixin = {
     return markup;
   },
 
-  getHostNode: function () {
+  getHostNode() {
     return ReactReconciler.getHostNode(this._renderedComponent);
   },
 
@@ -6603,7 +6603,7 @@ var ReactCompositeComponentMixin = {
   /**
    * @protected
    */
-  _renderValidatedComponentWithoutOwnerOrContext: function () {
+  _renderValidatedComponentWithoutOwnerOrContext() {
     var inst = this._instance;
 
     if ("development" !== 'production') {
@@ -6633,7 +6633,7 @@ var ReactCompositeComponentMixin = {
   /**
    * @private
    */
-  _renderValidatedComponent: function () {
+  _renderValidatedComponent() {
     var renderedComponent;
     if ("development" !== 'production' || this._compositeType !== CompositeTypes.StatelessFunctional) {
       ReactCurrentOwner.current = this;
@@ -6690,7 +6690,7 @@ var ReactCompositeComponentMixin = {
    * @return {string} The name or null.
    * @internal
    */
-  getName: function () {
+  getName() {
     var type = this._currentElement.type;
     var constructor = this._instance && this._instance.constructor;
     return type.displayName || constructor && constructor.displayName || type.name || constructor && constructor.name || null;
@@ -6704,7 +6704,7 @@ var ReactCompositeComponentMixin = {
    * @return {ReactComponent} the public component instance.
    * @internal
    */
-  getPublicInstance: function () {
+  getPublicInstance() {
     var inst = this._instance;
     if (this._compositeType === CompositeTypes.StatelessFunctional) {
       return null;
@@ -7847,7 +7847,7 @@ ReactDOMComponent.Mixin = {
     }
   },
 
-  getHostNode: function () {
+  getHostNode() {
     return getNode(this);
   },
 
@@ -7900,7 +7900,7 @@ ReactDOMComponent.Mixin = {
     }
   },
 
-  getPublicInstance: function () {
+  getPublicInstance() {
     return getNode(this);
   }
 
@@ -8210,7 +8210,7 @@ var ReactDOMDebugTool = {
   onDeleteValueForProperty: function (node, name) {
     emitEvent('onDeleteValueForProperty', node, name);
   },
-  onTestEvent: function () {
+  onTestEvent() {
     emitEvent('onTestEvent');
   }
 };
@@ -8270,11 +8270,11 @@ _assign(ReactDOMEmptyComponent.prototype, {
       return '<!--' + nodeValue + '-->';
     }
   },
-  receiveComponent: function () {},
-  getHostNode: function () {
+  receiveComponent() {},
+  getHostNode() {
     return ReactDOMComponentTree.getNodeFromInstance(this);
   },
-  unmountComponent: function () {
+  unmountComponent() {
     ReactDOMComponentTree.uncacheNode(this);
   }
 });
@@ -9531,7 +9531,7 @@ _assign(ReactDOMTextComponent.prototype, {
     }
   },
 
-  getHostNode: function () {
+  getHostNode() {
     var hostNode = this._commentNodes;
     if (hostNode) {
       return hostNode;
@@ -9553,7 +9553,7 @@ _assign(ReactDOMTextComponent.prototype, {
     return hostNode;
   },
 
-  unmountComponent: function () {
+  unmountComponent() {
     this._closingComment = null;
     this._commentNodes = null;
     ReactDOMComponentTree.uncacheNode(this);
@@ -10149,10 +10149,10 @@ var ReactDebugTool = {
       }
     }
   },
-  isProfiling: function () {
+  isProfiling() {
     return isProfiling;
   },
-  beginProfiling: function () {
+  beginProfiling() {
     if (isProfiling) {
       return;
     }
@@ -10162,7 +10162,7 @@ var ReactDebugTool = {
     resetMeasurements();
     ReactDebugTool.addDevtool(ReactHostOperationHistoryDevtool);
   },
-  endProfiling: function () {
+  endProfiling() {
     if (!isProfiling) {
       return;
     }
@@ -10171,16 +10171,16 @@ var ReactDebugTool = {
     resetMeasurements();
     ReactDebugTool.removeDevtool(ReactHostOperationHistoryDevtool);
   },
-  getFlushHistory: function () {
+  getFlushHistory() {
     return flushHistory;
   },
-  onBeginFlush: function () {
+  onBeginFlush() {
     currentFlushNesting++;
     resetMeasurements();
     pauseCurrentLifeCycleTimer();
     emitEvent('onBeginFlush');
   },
-  onEndFlush: function () {
+  onEndFlush() {
     resetMeasurements();
     currentFlushNesting--;
     resumeCurrentLifeCycleTimer();
@@ -10210,10 +10210,10 @@ var ReactDebugTool = {
     }
     emitEvent('onError', debugID);
   },
-  onBeginProcessingChildContext: function () {
+  onBeginProcessingChildContext() {
     emitEvent('onBeginProcessingChildContext');
   },
-  onEndProcessingChildContext: function () {
+  onEndProcessingChildContext() {
     emitEvent('onEndProcessingChildContext');
   },
   onHostOperation: function (debugID, type, payload) {
@@ -10228,7 +10228,7 @@ var ReactDebugTool = {
     checkDebugID(debugID);
     emitEvent('onComponentHasUpdated', debugID);
   },
-  onSetState: function () {
+  onSetState() {
     emitEvent('onSetState');
   },
   onSetDisplayName: function (debugID, displayName) {
@@ -10276,7 +10276,7 @@ var ReactDebugTool = {
     checkDebugID(debugID);
     emitEvent('onUnmountComponent', debugID);
   },
-  onTestEvent: function () {
+  onTestEvent() {
     emitEvent('onTestEvent');
   }
 };
@@ -10313,7 +10313,7 @@ var emptyFunction = _dereq_(156);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
-  close: function () {
+  close() {
     ReactDefaultBatchingStrategy.isBatchingUpdates = false;
   }
 };
@@ -10330,7 +10330,7 @@ function ReactDefaultBatchingStrategyTransaction() {
 }
 
 _assign(ReactDefaultBatchingStrategyTransaction.prototype, Transaction.Mixin, {
-  getTransactionWrappers: function () {
+  getTransactionWrappers() {
     return TRANSACTION_WRAPPERS;
   }
 });
@@ -11006,7 +11006,7 @@ var ReactElementValidator = {
       if (canDefineProperty) {
         Object.defineProperty(validatedFactory, 'type', {
           enumerable: false,
-          get: function () {
+          get() {
             "development" !== 'production' ? warning(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.') : void 0;
             Object.defineProperty(this, 'type', {
               value: type
@@ -11111,7 +11111,7 @@ var ReactErrorUtils = {
    * During execution of guarded functions we will capture the first error which
    * we will rethrow to be handled by the top level error handler.
    */
-  rethrowCaughtError: function () {
+  rethrowCaughtError() {
     if (caughtError) {
       var error = caughtError;
       caughtError = null;
@@ -11223,7 +11223,7 @@ function TopLevelCallbackBookKeeping(topLevelType, nativeEvent) {
   this.ancestors = [];
 }
 _assign(TopLevelCallbackBookKeeping.prototype, {
-  destructor: function () {
+  destructor() {
     this.topLevelType = null;
     this.nativeEvent = null;
     this.ancestors.length = 0;
@@ -11270,7 +11270,7 @@ var ReactEventListener = {
     ReactEventListener._enabled = !!enabled;
   },
 
-  isEnabled: function () {
+  isEnabled() {
     return ReactEventListener._enabled;
   },
 
@@ -11456,7 +11456,7 @@ var ReactHostOperationHistoryDevtool = {
       payload: payload
     });
   },
-  clearHistory: function () {
+  clearHistory() {
     if (ReactHostOperationHistoryDevtool._preventClearing) {
       // Should only be used for tests.
       return;
@@ -11464,7 +11464,7 @@ var ReactHostOperationHistoryDevtool = {
 
     history = [];
   },
-  getHistory: function () {
+  getHistory() {
     return history;
   }
 };
@@ -11544,7 +11544,7 @@ var ReactInputSelection = {
     return nodeName && (nodeName === 'input' && elem.type === 'text' || nodeName === 'textarea' || elem.contentEditable === 'true');
   },
 
-  getSelectionInformation: function () {
+  getSelectionInformation() {
     var focusedElem = getActiveElement();
     return {
       focusedElem: focusedElem,
@@ -11728,13 +11728,13 @@ if ("development" !== 'production') {
 }
 
 var ReactInvalidSetStateWarningDevTool = {
-  onBeginProcessingChildContext: function () {
+  onBeginProcessingChildContext() {
     processingChildContext = true;
   },
-  onEndProcessingChildContext: function () {
+  onEndProcessingChildContext() {
     processingChildContext = false;
   },
-  onSetState: function () {
+  onSetState() {
     warnInvalidSetState();
   }
 };
@@ -12944,17 +12944,17 @@ var invariant = _dereq_(164);
  * Refs are available when mounted and updated during reconciliation.
  *
  *   var MyComponent = React.createClass({
- *     render: function() {
+ *     render() {
  *       return (
  *         <div onClick={this.handleClick}>
  *           <CustomComponent ref="custom" />
  *         </div>
  *       );
  *     },
- *     handleClick: function() {
+ *     handleClick() {
  *       this.refs.custom.handleClick();
  *     },
- *     componentDidMount: function() {
+ *     componentDidMount() {
  *       this.refs.custom.initialize();
  *     }
  *   });
@@ -13097,7 +13097,7 @@ var warning = _dereq_(174);
  *       // A prop named "dialog" that requires an instance of Dialog.
  *       dialog: Props.instanceOf(Dialog).isRequired
  *     },
- *     render: function() { ... }
+ *     render() { ... }
  *   });
  *
  * A more formal specification of how these methods are used:
@@ -13122,7 +13122,7 @@ var warning = _dereq_(174);
  *        }
  *      }
  *    },
- *    render: function() {...}
+ *    render() {...}
  *  });
  *
  * @internal
@@ -13586,7 +13586,7 @@ var EVENT_SUPPRESSION = {
    * @return {boolean} The enabled status of `ReactBrowserEventEmitter` before
    * the reconciliation.
    */
-  initialize: function () {
+  initialize() {
     var currentlyEnabled = ReactBrowserEventEmitter.isEnabled();
     ReactBrowserEventEmitter.setEnabled(false);
     return currentlyEnabled;
@@ -13610,14 +13610,14 @@ var ON_DOM_READY_QUEUEING = {
   /**
    * Initializes the internal `onDOMReady` queue.
    */
-  initialize: function () {
+  initialize() {
     this.reactMountReady.reset();
   },
 
   /**
    * After DOM is flushed, invoke all registered `onDOMReady` callbacks.
    */
-  close: function () {
+  close() {
     this.reactMountReady.notifyAll();
   }
 };
@@ -13670,21 +13670,21 @@ var Mixin = {
    * @return {array<object>} List of operation wrap procedures.
    *   TODO: convert to array<TransactionWrapper>
    */
-  getTransactionWrappers: function () {
+  getTransactionWrappers() {
     return TRANSACTION_WRAPPERS;
   },
 
   /**
    * @return {object} The queue to collect `onDOMReady` callbacks with.
    */
-  getReactMountReady: function () {
+  getReactMountReady() {
     return this.reactMountReady;
   },
 
   /**
    * @return {object} The queue to collect React async events.
    */
-  getUpdateQueue: function () {
+  getUpdateQueue() {
     return ReactUpdateQueue;
   },
 
@@ -13692,7 +13692,7 @@ var Mixin = {
    * Save current transaction state -- if the return value from this method is
    * passed to `rollback`, the transaction will be reset to that state.
    */
-  checkpoint: function () {
+  checkpoint() {
     // reactMountReady is the our only stateful wrapper
     return this.reactMountReady.checkpoint();
   },
@@ -13705,7 +13705,7 @@ var Mixin = {
    * `PooledClass` looks for this, and will invoke this before allowing this
    * instance to be reused.
    */
-  destructor: function () {
+  destructor() {
     CallbackQueue.release(this.reactMountReady);
     this.reactMountReady = null;
   }
@@ -14121,7 +14121,7 @@ if ("development" !== 'production') {
 }
 
 var noopCallbackQueue = {
-  enqueue: function () {}
+  enqueue() {}
 };
 
 /**
@@ -14142,21 +14142,21 @@ var Mixin = {
    * @final
    * @return {array} Empty list of operation wrap procedures.
    */
-  getTransactionWrappers: function () {
+  getTransactionWrappers() {
     return TRANSACTION_WRAPPERS;
   },
 
   /**
    * @return {object} The queue to collect `onDOMReady` callbacks with.
    */
-  getReactMountReady: function () {
+  getReactMountReady() {
     return noopCallbackQueue;
   },
 
   /**
    * @return {object} The queue to collect React async events.
    */
-  getUpdateQueue: function () {
+  getUpdateQueue() {
     return this.updateQueue;
   },
 
@@ -14164,11 +14164,11 @@ var Mixin = {
    * `PooledClass` looks for this, and will invoke this before allowing this
    * instance to be reused.
    */
-  destructor: function () {},
+  destructor() {},
 
-  checkpoint: function () {},
+  checkpoint() {},
 
-  rollback: function () {}
+  rollback() {}
 };
 
 _assign(ReactServerRenderingTransaction.prototype, Transaction.Mixin, Mixin);
@@ -14609,10 +14609,10 @@ function ensureInjected() {
 }
 
 var NESTED_UPDATES = {
-  initialize: function () {
+  initialize() {
     this.dirtyComponentsLength = dirtyComponents.length;
   },
-  close: function () {
+  close() {
     if (this.dirtyComponentsLength !== dirtyComponents.length) {
       // Additional updates were enqueued by componentDidUpdate handlers or
       // similar; before our own UPDATE_QUEUEING wrapper closes, we want to run
@@ -14628,10 +14628,10 @@ var NESTED_UPDATES = {
 };
 
 var UPDATE_QUEUEING = {
-  initialize: function () {
+  initialize() {
     this.callbackQueue.reset();
   },
-  close: function () {
+  close() {
     this.callbackQueue.notifyAll();
   }
 };
@@ -14647,11 +14647,11 @@ function ReactUpdatesFlushTransaction() {
 }
 
 _assign(ReactUpdatesFlushTransaction.prototype, Transaction.Mixin, {
-  getTransactionWrappers: function () {
+  getTransactionWrappers() {
     return TRANSACTION_WRAPPERS;
   },
 
-  destructor: function () {
+  destructor() {
     this.dirtyComponentsLength = null;
     CallbackQueue.release(this.callbackQueue);
     this.callbackQueue = null;
@@ -16233,7 +16233,7 @@ function SyntheticEvent(dispatchConfig, targetInst, nativeEvent, nativeEventTarg
 
 _assign(SyntheticEvent.prototype, {
 
-  preventDefault: function () {
+  preventDefault() {
     this.defaultPrevented = true;
     var event = this.nativeEvent;
     if (!event) {
@@ -16248,7 +16248,7 @@ _assign(SyntheticEvent.prototype, {
     this.isDefaultPrevented = emptyFunction.thatReturnsTrue;
   },
 
-  stopPropagation: function () {
+  stopPropagation() {
     var event = this.nativeEvent;
     if (!event) {
       return;
@@ -16267,7 +16267,7 @@ _assign(SyntheticEvent.prototype, {
    * them back into the pool. This allows a way to hold onto a reference that
    * won't be added back into the pool.
    */
-  persist: function () {
+  persist() {
     this.isPersistent = emptyFunction.thatReturnsTrue;
   },
 
@@ -16281,7 +16281,7 @@ _assign(SyntheticEvent.prototype, {
   /**
    * `PooledClass` looks for `destructor` on each instance it releases.
    */
-  destructor: function () {
+  destructor() {
     var Interface = this.constructor.Interface;
     for (var propName in Interface) {
       if ("development" !== 'production') {
@@ -16908,7 +16908,7 @@ var Mixin = {
    * That can be useful if you decide to make your subclass of this mixin a
    * "PooledClass".
    */
-  reinitializeTransaction: function () {
+  reinitializeTransaction() {
     this.transactionWrappers = this.getTransactionWrappers();
     if (this.wrapperInitData) {
       this.wrapperInitData.length = 0;
@@ -16926,7 +16926,7 @@ var Mixin = {
    */
   getTransactionWrappers: null,
 
-  isInTransaction: function () {
+  isInTransaction() {
     return !!this._isInTransaction;
   },
 
@@ -17204,7 +17204,7 @@ module.exports = adler32;
 var canDefineProperty = false;
 if ("development" !== 'production') {
   try {
-    Object.defineProperty({}, 'x', { get: function () {} });
+    Object.defineProperty({}, 'x', { get() {} });
     canDefineProperty = true;
   } catch (x) {
     // IE will fail on defineProperty

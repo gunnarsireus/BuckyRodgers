@@ -1,5 +1,5 @@
 var Comment = React.createClass({
-    render: function() {
+    render() {
         var converter = new Showdown.converter();
         var rawMarkup = converter.makeHtml("Å Ä Ö å ä ö ");
         return (
@@ -12,7 +12,7 @@ ReactDOM.render(
 
 
 //var Bacon = React.createClass({
-//    render: function() {
+//    render() {
 //        return <h3>Detta är en enkel komponent</h3>;
 //    }
 //});

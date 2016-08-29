@@ -242,7 +242,7 @@ jQuery.fn = jQuery.prototype = {
 	// The default length of a jQuery object is 0
 	length: 0,
 
-	toArray: function() {
+	toArray() {
 		return core_slice.call( this );
 	},
 
@@ -287,15 +287,15 @@ jQuery.fn = jQuery.prototype = {
 		return this;
 	},
 
-	slice: function() {
+	slice() {
 		return this.pushStack( core_slice.apply( this, arguments ) );
 	},
 
-	first: function() {
+	first() {
 		return this.eq( 0 );
 	},
 
-	last: function() {
+	last() {
 		return this.eq( -1 );
 	},
 
@@ -311,7 +311,7 @@ jQuery.fn = jQuery.prototype = {
 		}));
 	},
 
-	end: function() {
+	end() {
 		return this.prevObject || this.constructor(null);
 	},
 
@@ -612,7 +612,7 @@ jQuery.extend({
 		return xml;
 	},
 
-	noop: function() {},
+	noop() {},
 
 	// Evaluates a script in a global context
 	// Workarounds based on findings by Jim Driscoll
@@ -900,7 +900,7 @@ jQuery.extend({
 				length ? fn( elems[0], key ) : emptyGet;
 	},
 
-	now: function() {
+	now() {
 		return ( new Date() ).getTime();
 	},
 
@@ -3080,7 +3080,7 @@ jQuery.Callbacks = function( options ) {
 		// Actual Callbacks object
 		self = {
 			// Add a callback or a collection of callbacks to the list
-			add: function() {
+			add() {
 				if ( list ) {
 					// First, we save the current length
 					var start = list.length;
@@ -3111,7 +3111,7 @@ jQuery.Callbacks = function( options ) {
 				return this;
 			},
 			// Remove a callback from the list
-			remove: function() {
+			remove() {
 				if ( list ) {
 					jQuery.each( arguments, function( _, arg ) {
 						var index;
@@ -3137,22 +3137,22 @@ jQuery.Callbacks = function( options ) {
 				return fn ? jQuery.inArray( fn, list ) > -1 : !!( list && list.length );
 			},
 			// Remove all callbacks from the list
-			empty: function() {
+			empty() {
 				list = [];
 				firingLength = 0;
 				return this;
 			},
 			// Have the list do nothing anymore
-			disable: function() {
+			disable() {
 				list = stack = memory = undefined;
 				return this;
 			},
 			// Is it disabled?
-			disabled: function() {
+			disabled() {
 				return !list;
 			},
 			// Lock the list in its current state
-			lock: function() {
+			lock() {
 				stack = undefined;
 				if ( !memory ) {
 					self.disable();
@@ -3160,7 +3160,7 @@ jQuery.Callbacks = function( options ) {
 				return this;
 			},
 			// Is it locked?
-			locked: function() {
+			locked() {
 				return !stack;
 			},
 			// Call all callbacks with the given context and arguments
@@ -3177,12 +3177,12 @@ jQuery.Callbacks = function( options ) {
 				return this;
 			},
 			// Call all the callbacks with the given arguments
-			fire: function() {
+			fire() {
 				self.fireWith( this, arguments );
 				return this;
 			},
 			// To know if the callbacks have already been called at least once
-			fired: function() {
+			fired() {
 				return !!fired;
 			}
 		};
@@ -3200,10 +3200,10 @@ jQuery.extend({
 			],
 			state = "pending",
 			promise = {
-				state: function() {
+				state() {
 					return state;
 				},
-				always: function() {
+				always() {
 					deferred.done( arguments ).fail( arguments );
 					return this;
 				},
@@ -5278,7 +5278,7 @@ jQuery.event = {
 		},
 		focus: {
 			// Fire native event if possible so blur/focus sequence is correct
-			trigger: function() {
+			trigger() {
 				if ( this !== safeActiveElement() && this.focus ) {
 					try {
 						this.focus();
@@ -5293,7 +5293,7 @@ jQuery.event = {
 			delegateType: "focusin"
 		},
 		blur: {
-			trigger: function() {
+			trigger() {
 				if ( this === safeActiveElement() && this.blur ) {
 					this.blur();
 					return false;
@@ -5303,7 +5303,7 @@ jQuery.event = {
 		},
 		click: {
 			// For checkbox, fire native event so checked state will be right
-			trigger: function() {
+			trigger() {
 				if ( jQuery.nodeName( this, "input" ) && this.type === "checkbox" && this.click ) {
 					this.click();
 					return false;
@@ -5412,7 +5412,7 @@ jQuery.Event.prototype = {
 	isPropagationStopped: returnFalse,
 	isImmediatePropagationStopped: returnFalse,
 
-	preventDefault: function() {
+	preventDefault() {
 		var e = this.originalEvent;
 
 		this.isDefaultPrevented = returnTrue;
@@ -5430,7 +5430,7 @@ jQuery.Event.prototype = {
 			e.returnValue = false;
 		}
 	},
-	stopPropagation: function() {
+	stopPropagation() {
 		var e = this.originalEvent;
 
 		this.isPropagationStopped = returnTrue;
@@ -5446,7 +5446,7 @@ jQuery.Event.prototype = {
 		// Set the cancelBubble property of the original event to true
 		e.cancelBubble = true;
 	},
-	stopImmediatePropagation: function() {
+	stopImmediatePropagation() {
 		this.isImmediatePropagationStopped = returnTrue;
 		this.stopPropagation();
 	}
@@ -5483,7 +5483,7 @@ jQuery.each({
 if ( !jQuery.support.submitBubbles ) {
 
 	jQuery.event.special.submit = {
-		setup: function() {
+		setup() {
 			// Only need this for delegated form submit events
 			if ( jQuery.nodeName( this, "form" ) ) {
 				return false;
@@ -5514,7 +5514,7 @@ if ( !jQuery.support.submitBubbles ) {
 			}
 		},
 
-		teardown: function() {
+		teardown() {
 			// Only need this for delegated form submit events
 			if ( jQuery.nodeName( this, "form" ) ) {
 				return false;
@@ -5531,7 +5531,7 @@ if ( !jQuery.support.changeBubbles ) {
 
 	jQuery.event.special.change = {
 
-		setup: function() {
+		setup() {
 
 			if ( rformElems.test( this.nodeName ) ) {
 				// IE doesn't fire change on a check/radio until blur; trigger it on click
@@ -5577,7 +5577,7 @@ if ( !jQuery.support.changeBubbles ) {
 			}
 		},
 
-		teardown: function() {
+		teardown() {
 			jQuery.event.remove( this, "._change" );
 
 			return !rformElems.test( this.nodeName );
@@ -5596,12 +5596,12 @@ if ( !jQuery.support.focusinBubbles ) {
 			};
 
 		jQuery.event.special[ fix ] = {
-			setup: function() {
+			setup() {
 				if ( attaches++ === 0 ) {
 					document.addEventListener( orig, handler, true );
 				}
 			},
-			teardown: function() {
+			teardown() {
 				if ( --attaches === 0 ) {
 					document.removeEventListener( orig, handler, true );
 				}
@@ -6057,7 +6057,7 @@ jQuery.fn.extend({
 		}, null, value, arguments.length );
 	},
 
-	append: function() {
+	append() {
 		return this.domManip( arguments, function( elem ) {
 			if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
 				var target = manipulationTarget( this, elem );
@@ -6066,7 +6066,7 @@ jQuery.fn.extend({
 		});
 	},
 
-	prepend: function() {
+	prepend() {
 		return this.domManip( arguments, function( elem ) {
 			if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
 				var target = manipulationTarget( this, elem );
@@ -6075,7 +6075,7 @@ jQuery.fn.extend({
 		});
 	},
 
-	before: function() {
+	before() {
 		return this.domManip( arguments, function( elem ) {
 			if ( this.parentNode ) {
 				this.parentNode.insertBefore( elem, this );
@@ -6083,7 +6083,7 @@ jQuery.fn.extend({
 		});
 	},
 
-	after: function() {
+	after() {
 		return this.domManip( arguments, function( elem ) {
 			if ( this.parentNode ) {
 				this.parentNode.insertBefore( elem, this.nextSibling );
@@ -6114,7 +6114,7 @@ jQuery.fn.extend({
 		return this;
 	},
 
-	empty: function() {
+	empty() {
 		var elem,
 			i = 0;
 
@@ -6190,7 +6190,7 @@ jQuery.fn.extend({
 		}, null, value, arguments.length );
 	},
 
-	replaceWith: function() {
+	replaceWith() {
 		var
 			// Snapshot the DOM in case .domManip sweeps something relevant into its fragment
 			args = jQuery.map( this, function( elem ) {
@@ -6797,7 +6797,7 @@ jQuery.fn.extend({
 		});
 	},
 
-	unwrap: function() {
+	unwrap() {
 		return this.parent().each(function() {
 			if ( !jQuery.nodeName( this, "body" ) ) {
 				jQuery( this ).replaceWith( this.childNodes );
@@ -6934,10 +6934,10 @@ jQuery.fn.extend({
 				jQuery.css( elem, name );
 		}, name, value, arguments.length > 1 );
 	},
-	show: function() {
+	show() {
 		return showHide( this, true );
 	},
-	hide: function() {
+	hide() {
 		return showHide( this );
 	},
 	toggle: function( state ) {
@@ -7473,10 +7473,10 @@ var r20 = /%20/g,
 	rsubmittable = /^(?:input|select|textarea|keygen)/i;
 
 jQuery.fn.extend({
-	serialize: function() {
+	serialize() {
 		return jQuery.param( this.serializeArray() );
 	},
-	serializeArray: function() {
+	serializeArray() {
 		return this.map(function(){
 			// Can add propHook for "elements" to filter or add form elements
 			var elements = jQuery.prop( this, "elements" );
@@ -7953,7 +7953,7 @@ jQuery.extend({
 				},
 
 				// Raw string
-				getAllResponseHeaders: function() {
+				getAllResponseHeaders() {
 					return state === 2 ? responseHeadersString : null;
 				},
 
@@ -8530,7 +8530,7 @@ jQuery.ajaxTransport( "script", function(s) {
 				head.insertBefore( script, head.firstChild );
 			},
 
-			abort: function() {
+			abort() {
 				if ( script ) {
 					script.onload( undefined, true );
 				}
@@ -8544,7 +8544,7 @@ var oldCallbacks = [],
 // Default jsonp settings
 jQuery.ajaxSetup({
 	jsonp: "callback",
-	jsonpCallback: function() {
+	jsonpCallback() {
 		var callback = oldCallbacks.pop() || ( jQuery.expando + "_" + ( ajax_nonce++ ) );
 		this[ callback ] = true;
 		return callback;
@@ -8816,7 +8816,7 @@ if ( xhrSupported ) {
 					}
 				},
 
-				abort: function() {
+				abort() {
 					if ( callback ) {
 						callback( undefined, true );
 					}
@@ -9215,7 +9215,7 @@ Tween.prototype = {
 		this.end = end;
 		this.unit = unit || ( jQuery.cssNumber[ prop ] ? "" : "px" );
 	},
-	cur: function() {
+	cur() {
 		var hooks = Tween.propHooks[ this.prop ];
 
 		return hooks && hooks.get ?
@@ -9643,7 +9643,7 @@ jQuery.offset = {
 
 jQuery.fn.extend({
 
-	position: function() {
+	position() {
 		if ( !this[ 0 ] ) {
 			return;
 		}
@@ -9680,7 +9680,7 @@ jQuery.fn.extend({
 		};
 	},
 
-	offsetParent: function() {
+	offsetParent() {
 		return this.map(function() {
 			var offsetParent = this.offsetParent || docElem;
 			while ( offsetParent && ( !jQuery.nodeName( offsetParent, "html" ) && jQuery.css( offsetParent, "position") === "static" ) ) {
