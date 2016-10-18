@@ -71,7 +71,11 @@ var CheckBox = React.createClass({
 var Board = React.createClass({
     getInitialState() {
         return {
-            comments: []
+            comments: [],
+            value: "value",
+            value1: "value1",
+            value2: "value2",
+            value3: "value3"
         }
     },
 
@@ -84,6 +88,10 @@ var Board = React.createClass({
         var arr = this.state.comments;
         arr.push(text);
         this.setState({ comments: arr });
+    },
+    setValues(text) {
+        this.setState({ value: 'New value',value1: 'New value1', value2: 'New value2', value3: 'New value3' });
+        console.log('setValues value: ' + this.state.value);
     },
     updateComment(newText,i) {
         console.log("Updating comment " + i);
@@ -105,14 +113,55 @@ var Board = React.createClass({
             <div className="board">
                 { this.state.comments.map(this.eachComment) }
             </div>
+            <Input value={this.state.value} />
+            <Panels value1={this.state.value1} value2={this.state.value2} value3={this.state.value2} />
+            <button className="btn-info" onClick={this.setValues}>Set values</button>
         </div>
         );
     }
 
 });
 
+var Input = React.createClass({
+    getInitialState: function() {
+        return {typed: '', value: this.props.value};
+    },
+    componentDidUpdate() {
+        console.log('componentDidUpdate value:' + this.state.value);
+    },
+    onChange: function(event) {
+        this.setState({ typed: event.target.value, value: event.target.value });
+    },
+    render: function() {
+        return <div>
+            <input type="text" onChange={this.onChange} value={this.state.value}/>
+            You typed: <code>{this.state.typed}</code>
+        </div>
+    }
+});
 
-ReactDOM.render(<Board /> , document.getElementById("example"));
+var Panels = React.createClass({
+    getInitialState: function() {
+        return {
+            value1: this.props.value1,
+            value2: this.props.value2,
+            value3: this.props.value3
+        };
+    },
+
+    render: function() {
+        return <div>
+            <Input value={this.state.value1}/>
+            <Input value={this.state.value2} />
+            <Input value={this.state.value3} />
+        </div>
+    }
+});
+
+ReactDOM.render(<Board value={'xxxx'} 
+                       value1={'xxxx'} 
+                       value2={'xxxx'} 
+                       value3={'xxxx'}/> , document.getElementById("example"));
 
 //ReactDOM.render(<CheckBox/>, document.getElementById("example"));
 
