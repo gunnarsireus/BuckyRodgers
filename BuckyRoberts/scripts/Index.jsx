@@ -72,10 +72,10 @@ var Board = React.createClass({
     getInitialState() {
         return {
             comments: [],
-            value: "value",
-            value1: "value1",
-            value2: "value2",
-            value3: "value3"
+            value: this.props.value,
+            value1: this.props.value1,
+            value2: this.props.value2,
+            value3: this.props.value3
         }
     },
 
@@ -90,12 +90,12 @@ var Board = React.createClass({
     },
     setValues(text) {
         this.setState({
-            value: (this.state.value + 'New value'),
-            value1: (this.state.value1 + 'New value1'),
-            value2: (this.state.value2 + 'New value2'),
-            value3: (this.state.value3 + 'New value3')
+            value: (Number(this.state.value) + 1),
+            value1: (Number(this.state.value1) + 1),
+            value2: (Number(this.state.value2) + 1),
+            value3: (Number(this.state.value3) + 1)
         });
-        console.log('setValues value: ' + this.state.value);
+        console.log('value: ' + this.state.value + ' value1: ' + this.state.value1 + ' value2: '+ this.state.value2 + ' value3: ' + this.state.value3);
     },
     updateComment(newText,i) {
         console.log("Updating comment " + i);
@@ -161,10 +161,10 @@ var Panels = React.createClass({
     }
 });
 
-ReactDOM.render(<Board value={'xxxx'}
-                       value1={'xxxx'}
-                       value2={'xxxx'}
-                       value3={'xxxx'} /> , document.getElementById("example"));
+ReactDOM.render(<Board value={'0'}
+                       value1={'1'}
+                       value2={'2'}
+                       value3={'3'} /> , document.getElementById("example"));
 
 //ReactDOM.render(<CheckBox />, document.getElementById("example"));
 
