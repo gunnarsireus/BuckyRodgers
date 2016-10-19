@@ -111,6 +111,7 @@ var Board = React.createClass({
         this.setState({ comments: arr });
     },
     render() {
+        console.log('Bord is rendered');
         return (
         <div>
             <button className="btn-info" onClick={this.add.bind(null, "Default text")}>Add New</button>
@@ -135,7 +136,8 @@ var Input = React.createClass({
     onChange: function(event) {
         this.setState({ typed: event.target.value, value: event.target.value });
     },
-    render: function() {
+    render: function () {
+        console.log('Input is rendered');
         return <div>
             <input type="text" onChange={this.onChange} value={this.state.value} />
             You typed: <code>{this.state.typed}</code>
@@ -152,7 +154,8 @@ var Panels = React.createClass({
         };
     },
 
-    render: function() {
+    render: function () {
+        console.log('Panels is rendered');
         return <div>
             <Input value={this.state.value1} />
             <Input value={this.state.value2} />
