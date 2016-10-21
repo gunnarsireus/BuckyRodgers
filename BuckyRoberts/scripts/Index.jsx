@@ -72,10 +72,10 @@ var Board = React.createClass({
     getInitialState() {
         return {
             comments: [],
-            value: this.props.value,
-            value1: this.props.value1,
-            value2: this.props.value2,
-            value3: this.props.value3
+            val: this.props.val,
+            val1: this.props.val1,
+            val2: this.props.val2,
+            val3: this.props.val3
         }
     },
 
@@ -90,12 +90,11 @@ var Board = React.createClass({
     },
     setValues(text) {
         this.setState({
-            value: (Number(this.state.value) + 1),
-            value1: (Number(this.state.value1) + 1),
-            value2: (Number(this.state.value2) + 1),
-            value3: (Number(this.state.value3) + 1)
+            val: (Number(this.state.val) + 1),
+            val1: (Number(this.state.val1) + 1),
+            val2: (Number(this.state.val2) + 1),
+            val3: (Number(this.state.val3) + 1)
         });
-        console.log('value: ' + this.state.value + ' value1: ' + this.state.value1 + ' value2: '+ this.state.value2 + ' value3: ' + this.state.value3);
     },
     updateComment(newText,i) {
         console.log("Updating comment " + i);
@@ -110,15 +109,25 @@ var Board = React.createClass({
         arr.splice(i, 1);
         this.setState({ comments: arr });
     },
+    componentDidUpdate: function () {
+        //$('#3').val(this.state.val3);
+        //$('#2').val(this.state.val2);
+        //$('#1').val(this.state.val1);
+        //$('#0').val(this.state.val);
+
+        document.getElementById('3').value = this.state.val3;
+        document.getElementById('2').value = this.state.val2;
+        document.getElementById('1').value = this.state.val1;
+        //document.getElementById('0').value = this.state.val;
+    },
     render() {
-        console.log('Bord is rendered');
         return (
         <div>
             <button className="btn-info" onClick={this.add.bind(null, "Default text")}>Add New</button>
             <div className="board">{ this.state.comments.map(this.eachComment) }
             </div>
-            <Input value={this.state.value} />
-            <Panels value1={this.state.value1} value2={this.state.value2} value3={this.state.value2} />
+            <Input val={this.state.val} />
+            <Panels val1={this.state.val1} val2={this.state.val2} val3={this.state.val3} />
             <button className="btn-info" onClick={this.setValues}>Set values</button>
         </div>
         );
@@ -127,47 +136,46 @@ var Board = React.createClass({
 });
 
 var Input = React.createClass({
-    getInitialState: function() {
-        return {typed: '', value: this.props.value};
-    },
-    componentDidUpdate() {
-        console.log('componentDidUpdate value:' + this.state.value);
+    getInitialState: function () {
+        return {typed: '', val: this.props.val};
     },
     onChange: function(event) {
-        this.setState({ typed: event.target.value, value: event.target.value });
+        this.setState({ typed: event.target.value, val: event.target.value });
+    },
+    componentDidUpdate: function(){
     },
     render: function () {
-        console.log('Input is rendered');
+        console.log('Input rendered val: ' + this.state.val)
         return <div>
-            <input type="text" onChange={this.onChange} value={this.state.value} />
+            <input type="text" onChange={this.onChange} value={this.state.val} id={this.props.val} />
             You typed: <code>{this.state.typed}</code>
         </div>
     }
 });
 
 var Panels = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
-            value1: this.props.value1,
-            value2: this.props.value2,
-            value3: this.props.value3
+            val1: this.props.val1,
+            val2: this.props.val2,
+            val3: this.props.val3
         };
     },
-
+    componentDidUpdate: function () {
+    },
     render: function () {
-        console.log('Panels is rendered');
         return <div>
-            <Input value={this.state.value1} />
-            <Input value={this.state.value2} />
-            <Input value={this.state.value3} />
+            <Input val={this.state.val1} />
+            <Input val={this.state.val2} />
+            <Input val={this.state.val3} />
         </div>
     }
 });
 
-ReactDOM.render(<Board value={'0'}
-                       value1={'1'}
-                       value2={'2'}
-                       value3={'3'} /> , document.getElementById("example"));
+ReactDOM.render(<Board val={0}
+                       val1={1}
+                       val2={2}
+                       val3={3} /> , document.getElementById("example"));
 
 //ReactDOM.render(<CheckBox />, document.getElementById("example"));
 
