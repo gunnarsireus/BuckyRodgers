@@ -72,10 +72,6 @@ var Board = React.createClass({
     getInitialState() {
         return {
             comments: [],
-            val: this.props.val,
-            val1: this.props.val1,
-            val2: this.props.val2,
-            val3: this.props.val3
         }
     },
 
@@ -89,12 +85,10 @@ var Board = React.createClass({
         this.setState({ comments: arr });
     },
     setValues(text) {
-        this.setState({
-            val: (Number(this.state.val) + 1),
-            val1: (Number(this.state.val1) + 1),
-            val2: (Number(this.state.val2) + 1),
-            val3: (Number(this.state.val3) + 1)
-        });
+        document.getElementById('0').value = Number(document.getElementById('0').value) + 1;
+        document.getElementById('3').value = Number(document.getElementById('3').value) + 1;
+        document.getElementById('2').value = Number(document.getElementById('2').value) + 1;
+        document.getElementById('1').value = Number(document.getElementById('1').value) + 1;
     },
     updateComment(newText,i) {
         console.log("Updating comment " + i);
@@ -110,15 +104,6 @@ var Board = React.createClass({
         this.setState({ comments: arr });
     },
     componentDidUpdate: function () {
-        //$('#3').val(this.state.val3);
-        //$('#2').val(this.state.val2);
-        //$('#1').val(this.state.val1);
-        //$('#0').val(this.state.val);
-
-        document.getElementById('3').value = this.state.val3;
-        document.getElementById('2').value = this.state.val2;
-        document.getElementById('1').value = this.state.val1;
-        //document.getElementById('0').value = this.state.val;
     },
     render() {
         return (
@@ -126,8 +111,8 @@ var Board = React.createClass({
             <button className="btn-info" onClick={this.add.bind(null, "Default text")}>Add New</button>
             <div className="board">{ this.state.comments.map(this.eachComment) }
             </div>
-            <Input val={this.state.val} />
-            <Panels val1={this.state.val1} val2={this.state.val2} val3={this.state.val3} />
+            <Input id={this.props.id0} />
+            <Panels id1={this.props.id1} id2={this.props.id2} id3={this.props.id3} />
             <button className="btn-info" onClick={this.setValues}>Set values</button>
         </div>
         );
@@ -137,7 +122,10 @@ var Board = React.createClass({
 
 var Input = React.createClass({
     getInitialState: function () {
-        return {typed: '', val: this.props.val};
+        return {
+            typed: '',
+            val: this.props.id
+        };
     },
     onChange: function(event) {
         this.setState({ typed: event.target.value, val: event.target.value });
@@ -145,9 +133,9 @@ var Input = React.createClass({
     componentDidUpdate: function(){
     },
     render: function () {
-        console.log('Input rendered val: ' + this.state.val)
+        console.log('Input rendered id ' + this.props.id)
         return <div>
-            <input type="text" onChange={this.onChange} value={this.state.val} id={this.props.val} />
+            <input type="text" onChange={this.onChange} value={this.state.val} id={this.props.id} />
             You typed: <code>{this.state.typed}</code>
         </div>
     }
@@ -156,26 +144,23 @@ var Input = React.createClass({
 var Panels = React.createClass({
     getInitialState: function () {
         return {
-            val1: this.props.val1,
-            val2: this.props.val2,
-            val3: this.props.val3
         };
     },
     componentDidUpdate: function () {
     },
     render: function () {
         return <div>
-            <Input val={this.state.val1} />
-            <Input val={this.state.val2} />
-            <Input val={this.state.val3} />
+            <Input id={this.props.id1} />
+            <Input id={this.props.id2} />
+            <Input id={this.props.id3} />
         </div>
     }
 });
 
-ReactDOM.render(<Board val={0}
-                       val1={1}
-                       val2={2}
-                       val3={3} /> , document.getElementById("example"));
+ReactDOM.render(<Board id0={0}
+                       id1={1}
+                       id2={2}
+                       id3={3} /> , document.getElementById("example"));
 
 //ReactDOM.render(<CheckBox />, document.getElementById("example"));
 
