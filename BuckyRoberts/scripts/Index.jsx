@@ -85,10 +85,10 @@ var Board = React.createClass({
         this.setState({ comments: arr });
     },
     setValues(text) {
-        document.getElementById('0').value = Number(document.getElementById('0').value) + 1;
-        document.getElementById('3').value = Number(document.getElementById('3').value) + 1;
-        document.getElementById('2').value = Number(document.getElementById('2').value) + 1;
-        document.getElementById('1').value = Number(document.getElementById('1').value) + 1;
+        document.getElementById(this.props.id0).value = Number(document.getElementById(this.props.id0).value) + 1;
+        document.getElementById(this.props.id3).value = Number(document.getElementById(this.props.id3).value) + 1;
+        document.getElementById(this.props.id2).value = Number(document.getElementById(this.props.id2).value) + 1;
+        document.getElementById(this.props.id1).value = Number(document.getElementById(this.props.id1).value) + 1;
     },
     updateComment(newText,i) {
         console.log("Updating comment " + i);
@@ -157,10 +157,10 @@ var Panels = React.createClass({
     }
 });
 
-ReactDOM.render(<Board id0={0}
-                       id1={1}
-                       id2={2}
-                       id3={3} /> , document.getElementById("example"));
+ReactDOM.render(<Board id0={'0'}
+                       id1={'1'}
+                       id2={'2'}
+                       id3={'3'} /> , document.getElementById("example"));
 
 //ReactDOM.render(<CheckBox />, document.getElementById("example"));
 
