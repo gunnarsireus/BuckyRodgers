@@ -133,7 +133,7 @@ var Input = React.createClass({
     componentDidUpdate: function(){
     },
     render: function () {
-        console.log('Input rendered id ' + this.props.id)
+        console.log('Input rendered val ' + this.state.val)
         return <div>
             <input type="text" onChange={this.onChange} value={this.state.val} id={this.props.id} />
             You typed: <code>{this.state.typed}</code>
