@@ -69,7 +69,8 @@ var CheckBox = React.createClass({
 });
 
 var Board = React.createClass({
-    getInitialState() {
+    getInitialState() {       
+        console.log('Board getInitialState');
         return {
             comments: [],
             value: this.props.value,
@@ -132,6 +133,7 @@ var Board = React.createClass({
     render() {
         return (
         <div>
+            console.log('Board rendered value ');
             <button className="btn-info" onClick={this.add.bind(null, "Default text" )}>Add New</button>
             <div className="board">
                 { this.state.comments.map(this.eachComment) }
@@ -146,7 +148,8 @@ var Board = React.createClass({
 });
 
 var Input = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
+        console.log('Input getInitialState');
         return {typed: '', value: this.props.value};
     },
     componentWillReceiveProps(nextProps) {
@@ -171,6 +174,7 @@ var Input = React.createClass({
 
 var Panels = React.createClass({
     getInitialState: function () {
+        console.log('Panels getInitialState');
         return {
             value1: this.props.value1,
             value2: this.props.value2,
@@ -192,6 +196,7 @@ var Panels = React.createClass({
         };
     },
     render: function () {
+        console.log('Panels render');
         return <div>
             <Input value={this.state.value1} />
             <Input value={this.state.value2} />
